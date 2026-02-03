@@ -1,10 +1,10 @@
-package com.g16.assignment;
+package com.dea.ecommerce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AssignmentApplicationTests {
+class EcommerceApplicationTests {
 
 	@Test
 	void contextLoads() {
