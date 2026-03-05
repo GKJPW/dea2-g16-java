@@ -1,0 +1,125 @@
+/* Page background + center layout */
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #1f2937, #020617);
+  padding: 40px 16px;
+}
+
+/* Main container */
+.container {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card design */
+.card {
+  background: #0b0f19;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+}
+
+/* Title */
+.title {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #e5e7eb;
+}
+
+/* Input styles */
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: white;
+  font-size: 14px;
+}
+
+/* Rating input spacing */
+.rating {
+  margin-top: 12px;
+}
+
+/* Button styles */
+button {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Add review button */
+button.primary {
+  background: white;
+  color: black;
+}
+
+/* Edit button */
+button.secondary {
+  background: #1f2937;
+  color: white;
+}
+
+/* Delete button */
+button.danger {
+  background: #ef4444;
+  color: white;
+}
+
+/* Review list */
+.review {
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+/* Review header */
+.reviewHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Star rating */
+.ratingStar {
+  color: #facc15;
+}
+
+/* Comment text */
+.comment {
+  margin-top: 6px;
+  color: #d1d5db;
+}
+
+/* Buttons under review */
+.reviewActions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Success message */
+.success {
+  color: #22c55e;
+  margin-top: 8px;
+}
+
+/* Error message */
+.error {
+  color: #ef4444;
+  margin-top: 8px;
+}
