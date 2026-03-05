@@ -1,0 +1,155 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  background: #1e1e1e;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.card {
+  width: 100%;
+  max-width: 720px;
+  background: #2a2a2a;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  font-size: 28px;
+}
+
+.subtitle {
+  text-align: center;
+  margin: 10px 0 24px;
+  opacity: 0.85;
+}
+
+.label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #333;
+  color: #fff;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #777;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.resultTitle {
+  text-align: center;
+  margin-top: 26px;
+  margin-bottom: 10px;
+}
+
+.resultBox {
+  background: #111;       /* ✅ no more white */
+  color: #00ff9d;         /* nice terminal-green output */
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 14px;
+  overflow: auto;
+  min-height: 120px;
+}
+
+.statusBanner {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 1px solid #333;
+}
+
+.statusBanner.info {
+  background: #1b2a3a;
+  color: #8fd3ff;
+}
+
+.statusBanner.success {
+  background: #122b1f;
+  color: #5cffb5;
+}
+
+.statusBanner.error {
+  background: #2d1414;
+  color: #ff9c9c;
+}
