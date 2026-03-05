@@ -1,0 +1,21 @@
+package com.dea.ecommerce.service;
+
+import com.dea.ecommerce.model.Product;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+public interface ProductService {
+
+    Product createProduct(Product product);
+
+    List<Product> getAllProducts();
+
+    Product getProductById(Long id);
+
+    Product updateProduct(Long id, Product productDetails);
+
+    void deleteProduct(Long id);
+
+    List<Product> filterProducts(String category, BigDecimal minPrice, BigDecimal maxPrice);
+}
