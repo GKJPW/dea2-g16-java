@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/users, /api/users/, /api/users/**
+            - id: cart-service
+              uri: lb://CART-SERVICE
+              predicates:
+                - Path=/api/carts, /api/carts/, /api/carts/**
+            - id: product-service
+              uri: lb://PRODUCT-SERVICE
+              predicates:
+                - Path=/api/products, /api/products/, /api/products/**
+            - id: order-service
+              uri: lb://ORDER-SERVICE
+              predicates:
+                - Path=/api/orders, /api/orders/, /api/orders/**
+            - id: inventory-service
+              uri: lb://INVENTORY-SERVICE
+              predicates:
+                - Path=/api/inventory, /api/inventory/, /api/inventory/**
+            - id: payment-service
+              uri: lb://PAYMENT-SERVICE
+              predicates:
+                - Path=/api/payments, /api/payments/, /api/payments/**
+            - id: review-service
+              uri: lb://REVIEW-SERVICE
+              predicates:
+                - Path=/api/reviews, /api/reviews/, /api/reviews/**
+            - id: notification-service
+              uri: lb://NOTIFICATION-SERVICE
+              predicates:
+                - Path=/api/notifications, /api/notifications/, /api/notifications/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true

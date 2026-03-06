@@ -1,0 +1,8 @@
+CREATE DATABASE IF NOT EXISTS user_service_db;
+CREATE DATABASE IF NOT EXISTS product_service_db;
+CREATE DATABASE IF NOT EXISTS order_service_db;
+CREATE DATABASE IF NOT EXISTS inventory_service_db;
+CREATE DATABASE IF NOT EXISTS payment_service_db;
+CREATE DATABASE IF NOT EXISTS review_service_db;
+CREATE DATABASE IF NOT EXISTS cart_service_db;
+CREATE DATABASE IF NOT EXISTS notification_service_db;

@@ -1,0 +1,150 @@
+version: '3.8'
+
+services:
+  # 1. The Database
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 7290sql#pc2_GKJPW+janith@developer
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p7290sql#pc2_GKJPW+janith@developer"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. The Phonebook
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+
+  # 3. The Front Door
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka-server:8761/eureka/
+
+  # 4-11. The Business Logic Services
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    environment: &spring-microservice-env
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/user_service_db?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 7290sql#pc2_GKJPW+janith@developer
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+  product-service:
+    build: ./product-service
+    container_name: product-service
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    environment:
+      <<: *spring-microservice-env
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/product_service_db?useSSL=false&allowPublicKeyRetrieval=true
+
+  order-service:
+    build: ./order-service
+    container_name: order-service
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    environment:
+      <<: *spring-microservice-env
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/order_service_db?useSSL=false&allowPublicKeyRetrieval=true
+
+  inventory-service:
+    build: ./inventory-service
+    container_name: inventory-service
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    environment:
+      <<: *spring-microservice-env
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/inventory_service_db?useSSL=false&allowPublicKeyRetrieval=true
+
+  payment-service:
+    build: ./payment-service
+    container_name: payment-service
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    environment:
+      <<: *spring-microservice-env
+      # 🟢 CRITICAL FIX: Added createDatabaseIfNotExist=true so it doesn't crash on startup!
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/payment_service_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+
+  review-service:
+    build: ./review-service
+    container_name: review-service
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    environment:
+      <<: *spring-microservice-env
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/review_service_db?useSSL=false&allowPublicKeyRetrieval=true
+
+  cart-service:
+    build: ./cart-service
+    container_name: cart-service
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    environment:
+      <<: *spring-microservice-env
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/cart_service_db?useSSL=false&allowPublicKeyRetrieval=true
+
+  notification-service:
+    build: ./notification-service
+    container_name: notification-service
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_started
+    environment:
+      <<: *spring-microservice-env
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/notification_service_db?useSSL=false&allowPublicKeyRetrieval=true
+
+  # 12. The React Frontend
+  frontend:
+    build:
+      context: ../frontend  # 🟢 Steps out of backend and into the frontend folder
+      dockerfile: Dockerfile
+    container_name: omnicart-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api-gateway
