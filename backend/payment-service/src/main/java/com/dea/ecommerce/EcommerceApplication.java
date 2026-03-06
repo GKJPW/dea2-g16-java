@@ -1,13 +1,33 @@
-package com.dea.ecommerce;
+package com.university.payment_service.entity;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import jakarta.persistence.*;
+import lombok.*;
 
-@SpringBootApplication
-public class EcommerceApplication {
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-	public static void main(String[] args) {
-		SpringApplication.run(EcommerceApplication.class, args);
-	}
+@Entity
+@Table(name = "payments")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Payment {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private Long orderId;
+
+	private BigDecimal amount;
+
+	private String paymentMethod;
+
+	private String paymentStatus;
+
+	private LocalDateTime paymentDate;
+
 
 }
